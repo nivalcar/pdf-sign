@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PDF 서명 입히기</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  </head>
+  <body>
+    <main class="container">
+      <h1>PDF 서명 입히기</h1>
+      <p class="description">
+        보험모집인 영역(<strong>보험모집인 : 조정국 (서명/인)</strong>)에 서명 이미지를
+        자동으로 배치한 뒤 PDF를 다운로드합니다.
+      </p>
+
+      <section class="card">
+        <h2>1) PDF 원본 등록</h2>
+        <label class="field">
+          <span>PDF 파일 업로드</span>
+          <input id="pdfFile" type="file" accept="application/pdf" />
+        </label>
+        <label class="field">
+          <span>또는 PDF URL 입력</span>
+          <input id="pdfUrl" type="url" placeholder="https://...sample.pdf" />
+        </label>
+      </section>
+
+      <section class="card">
+        <h2>2) 서명 이미지 등록</h2>
+        <label class="field">
+          <span>서명 이미지 업로드 (PNG/JPG)</span>
+          <input id="signFile" type="file" accept="image/png,image/jpeg" />
+        </label>
+        <label class="field">
+          <span>또는 이미지 URL 입력</span>
+          <input id="signUrl" type="url" placeholder="https://...signature.png" />
+        </label>
+      </section>
+
+      <section class="card compact">
+        <h2>3) 세부 조정 (선택)</h2>
+        <div class="grid-3">
+          <label class="field">
+            <span>서명 너비 (pt)</span>
+            <input id="signWidth" type="number" value="64" min="30" max="200" />
+          </label>
+          <label class="field">
+            <span>X 오프셋 (pt)</span>
+            <input id="offsetX" type="number" value="0" min="-200" max="200" />
+          </label>
+          <label class="field">
+            <span>Y 오프셋 (pt)</span>
+            <input id="offsetY" type="number" value="8" min="-200" max="200" />
+          </label>
+        </div>
+      </section>
+
+      <button id="signButton" class="primary">[서명] PDF 생성</button>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+    </main>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
