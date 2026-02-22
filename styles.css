@@ -161,3 +161,29 @@ h1 {
     grid-template-columns: 1fr;
   }
 }
+
+.test-link-fab {
+  position: fixed;
+  left: 12px;
+  bottom: 12px;
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 52px;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: #111827;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-decoration: none;
+  opacity: 0.85;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.test-link-fab:hover {
+  opacity: 1;
+}
