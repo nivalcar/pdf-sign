@@ -1,18 +1,14 @@
 // JavaScript 버전 - PDF 서명 애플리케이션 (TypeScript 스타일 타입 주석 적용)
 import {
-  INSURANCE_CONFIGS,
-  detectInsuranceType,
-  getInsuranceKeyword,
   findAgentAnchor,
-  isValidInsuranceType,
-  assertInsuranceType,
+  calculateAnchorPlacement,
   isAnchorResult
 } from './insurance-types.js';
 
 const { PDFDocument } = window.PDFLib;
 const pdfjsLib = window['pdfjs-dist/build/pdf'];
 pdfjsLib.GlobalWorkerOptions.workerSrc =
-  'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  './node_modules/pdfjs-dist/build/pdf.worker.min.js';
 
 /**
  * DOM 요소 타입 정의
@@ -450,14 +446,15 @@ async function signPdf() {
     let y = 72 + dy;
 
     if (isAnchorResult(anchor)) {
-      pageIndex = anchor.pageIndex;
-      // '(서명/인)' 문구의 가로 중앙과 서명 이미지의 가로 중앙을 일치시킴
-      x = anchor.x + anchor.width / 2 - signWidth / 2 + dx;
-
-      // 텍스트의 baseline(anchor.y)으로부터 글자 높이 절반 위가 글자 중앙
-      // 서명 이미지의 높이 절반을 빼서 글자 중앙과 이미지 중앙을 일치시킴
-      const textCenterY = anchor.y + 5; // 일반적인 텍스트 높이의 절반(약 5pt) 가산
-      y = textCenterY - signHeight / 2 + dy;
+      const placement = calculateAnchorPlacement(anchor, {
+        signWidth,
+        signHeight,
+        offsetX: dx,
+        offsetY: dy,
+      });
+      pageIndex = placement.pageIndex;
+      x = placement.x;
+      y = placement.y;
     }
 
     const page = pdfDoc.getPage(pageIndex);

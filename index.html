@@ -1,21 +1,20 @@
 <!doctype html>
 <html lang="ko">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PDF 서명 입히기</title>
-  <link rel="stylesheet" href="styles.css" />
-  <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <link rel="stylesheet" href="./styles.css" />
+  <script src="./node_modules/pdf-lib/dist/pdf-lib.min.js"></script>
+  <script src="./node_modules/pdfjs-dist/build/pdf.min.js"></script>
 </head>
-
 <body>
   <main class="container">
     <h1>PDF 서명 입히기</h1>
     <p class="description">
-      보험 양식(장기, 일반, 자동차)을 자동 감지하여 <strong>보험모집인</strong> 또는
-      <strong>설계사</strong> 영역의 <strong>(서명/인)</strong> 위치에 서명 이미지를 배치합니다.
+      보험 양식(장기, 일반, 자동차)을 자동 감지해서
+      <strong>보험모집인</strong> 또는 <strong>설계사</strong> 영역의
+      <strong>(서명/인)</strong> 위치에 서명 이미지를 배치합니다.
     </p>
 
     <section class="card split">
@@ -34,7 +33,7 @@
         <div class="hint">PDF 파일을 여기에 끌어다 놓으세요</div>
         <div class="preview-box">
           <canvas id="pdfPreviewCanvas" class="pdf-canvas"></canvas>
-          <span class="filename">파일 선택됨</span>
+          <span class="filename">파일 선택 전</span>
         </div>
       </div>
     </section>
@@ -55,7 +54,7 @@
         <div class="hint">서명 이미지를 여기에 끌어다 놓으세요</div>
         <div class="preview-box">
           <img id="signPreview" src="" alt="서명 미리보기" />
-          <span class="filename">이미지 선택됨</span>
+          <span class="filename">이미지 선택 전</span>
         </div>
       </div>
     </section>
@@ -82,9 +81,7 @@
     <p id="status" class="status" role="status" aria-live="polite"></p>
   </main>
 
-
-  <a class="test-link-fab" href="test.html" aria-label="테스트 페이지로 이동">TEST</a>
-  <script type="module" src="app.js"></script>
+  <a class="test-link-fab" href="./test.html" aria-label="테스트 페이지로 이동">TEST</a>
+  <script type="module" src="./app.js"></script>
 </body>
-
 </html>
