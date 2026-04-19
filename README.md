@@ -8,6 +8,44 @@
 - `보험모집인 : 조정국 (서명/인)` 텍스트를 PDF에서 탐색해 해당 영역 주변에 서명 자동 배치
 - 필요 시 너비 / X,Y 오프셋으로 미세 조정
 
+## TypeScript 제네릭 적용
+
+보험 종류별 처리를 TypeScript 제네릭을 활용하여 타입 안전성을 높였습니다:
+
+### 보험 타입 정의
+```javascript
+/**
+ * @typedef {'장기'|'일반'|'자동차'} InsuranceType
+ */
+```
+
+### 제네릭 인터페이스
+```javascript
+/**
+ * @typedef {Object} AnchorResult
+ * @property {number} pageIndex - 페이지 인덱스
+ * @property {number} x - X 좌표
+ * @property {number} y - Y 좌표
+ * @property {number} width - 너비
+ * @property {string} text - 텍스트
+ * @property {InsuranceType} docType - 감지된 문서 타입
+ */
+```
+
+### 타입별 설정
+```javascript
+const INSURANCE_CONFIGS = {
+  장기: { type: '장기', keyword: '보험모집인', detectPattern: '보험상품' },
+  일반: { type: '일반', keyword: '설계사', detectPattern: '일반보험상품' },
+  자동차: { type: '자동차', keyword: '설계사', detectPattern: '자동차보험상품' }
+};
+```
+
+### 제네릭 함수 활용
+- `detectInsuranceType()`: 텍스트에서 보험 타입 자동 감지
+- `getInsuranceKeyword()`: 타입별 키워드 반환
+- `findAgentAnchor()`: 타입별 서명 위치 탐색
+
 ## 로컬 실행
 이 프로젝트는 정적 파일 앱이라 **빌드/백엔드 없이 실행**됩니다.
 
